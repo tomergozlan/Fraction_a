@@ -16,8 +16,14 @@ namespace ariel {
             denominator == std::numeric_limits<int>::min() || denominator == std::numeric_limits<int>::max()) {
             throw std::out_of_range("Numerator or denominator value is out of range.");
         }
+        if(numerator<0 && denominator<0 || numerator > 0 && denominator < 0){
+            denominator *= -1;
+            numerator *= -1;
+        }
+
         this->denominator=denominator;
         this->numerator=numerator;
+
         reduceForm();
     }
     Fraction::Fraction(const Fraction& other) {
