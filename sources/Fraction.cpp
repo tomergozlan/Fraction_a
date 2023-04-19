@@ -6,6 +6,7 @@
 #include <stdexcept>
 #include <cmath>
 #include <limits>
+#include <iomanip>
 
 namespace ariel {
     Fraction::Fraction(int numerator, int denominator) {
@@ -20,7 +21,6 @@ namespace ariel {
             denominator *= -1;
             numerator *= -1;
         }
-
         this->denominator=denominator;
         this->numerator=numerator;
 
@@ -42,6 +42,17 @@ namespace ariel {
             this->denominator /= gcd;
         }
     }
+
+     Fraction Fraction::convertFloatToFraction(float value){
+        if (value > std::numeric_limits<float>::max() || value < std::numeric_limits<float>::min()) {
+            throw out_of_range("ERROR: out of range float number.");
+        }
+        int numerator = (value*1000) ;
+        int denominator = 1000;
+        Fraction fraction (numerator,denominator);
+        return fraction;
+    }
+
     int Fraction::getNumerator() {
         return this->numerator;
     }
@@ -161,4 +172,59 @@ namespace ariel {
         }
         return in;
     }
-}
+        Fraction operator+(float float_num, Fraction& fraction) {
+            Fraction float_frac = Fraction::convertFloatToFraction(float_num);
+            Fraction resultFraction;
+
+            resultFraction.setNumerator(float_frac.getNumerator() * fraction.getDenominator() + fraction.getNumerator() * float_frac.getDenominator());
+            resultFraction.setDenominator(float_frac.getDenominator() * fraction.getDenominator());
+            resultFraction.reduceForm();
+
+            return resultFraction;
+        }
+
+        Fraction operator+(Fraction& fraction,float float_num) {
+        Fraction float_frac = Fraction::convertFloatToFraction(float_num);
+        Fraction resultFraction;
+
+        resultFraction.setNumerator(float_frac.getNumerator() * fraction.getDenominator() + fraction.getNumerator() * float_frac.getDenominator());
+        resultFraction.setDenominator(float_frac.getDenominator() * fraction.getDenominator());
+        resultFraction.reduceForm();
+
+        return resultFraction;
+    }
+
+    }
+
+//    friend Fraction operator+(const float& fraction, const Fraction& float_num);
+//
+//    friend Fraction operator+(const Fraction& fraction, const float& float_num);
+//    friend Fraction operator+(const float& float_num, const Fraction& fraction);
+//
+//    friend Fraction operator-(const Fraction& fraction, const float& float_num);
+//    friend Fraction operator-(const float& float_num, const Fraction& fraction);
+//
+//    friend Fraction operator*(const Fraction& fraction, const float& float_num);
+//    friend Fraction operator*(const float& float_num, const Fraction& fraction);
+//
+//    friend Fraction operator/(const Fraction& fraction, const float& float_num);
+//    friend Fraction operator/(const float& float_num, const Fraction& fraction);
+//
+//    friend bool operator==(const Fraction& fraction, const float& float_num);
+//    friend bool operator==(const float& float_num, const Fraction& fraction);
+//
+//    friend bool operator!=(const Fraction& fraction, const float& float_num);
+//    friend bool operator!=(const float& float_num, const Fraction& fraction);
+//
+//    friend bool operator<(const Fraction& fraction, const float& float_num);
+//    friend bool operator<(const float& float_num, const Fraction& fraction);
+//
+//    friend bool operator<=(const Fraction& fraction, const float& float_num);
+//    friend bool operator<=(const float& float_num, const Fraction& fraction);
+//
+//    friend bool operator>(const Fraction& fraction, const float& float_num);
+//    friend bool operator>(const float& float_num, const Fraction& fraction);
+//
+//    friend bool operator>=(const Fraction& fraction, const float& float_num);
+//    friend bool operator>=(const float& float_num, const Fraction& fraction);
+
