@@ -16,7 +16,9 @@ namespace ariel{
 
      int numerator;
      int denominator;
+
     public:
+
      void reduceForm();
      int gcd(int number1 , int number2);
      static Fraction convertFloatToFraction(float value);
@@ -66,14 +68,14 @@ namespace ariel{
         friend bool operator<(Fraction& fraction,float float_num);
         friend bool operator<(float float_num,Fraction& fraction);
 
-        friend bool operator<=(const Fraction& fraction, const float& float_num);
-        friend bool operator<=(const float& float_num, const Fraction& fraction);
+        friend bool operator<=(Fraction& fraction,float float_num);
+        friend bool operator<=(float float_num,Fraction& fraction);
 
-        friend bool operator>(const Fraction& fraction, const float& float_num);
-        friend bool operator>(const float& float_num, const Fraction& fraction);
+        friend bool operator>(Fraction& fraction,float float_num);
+        friend bool operator>(float float_num,Fraction& fraction);
 
-        friend bool operator>=(const Fraction& fraction, const float& float_num);
-        friend bool operator>=(const float& float_num, const Fraction& fraction);
+        friend bool operator>=(Fraction& fraction,float& float_num);
+        friend bool operator>=(float float_num,Fraction& fraction);
     };
 }
 
