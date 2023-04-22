@@ -51,23 +51,20 @@ namespace ariel{
         friend Fraction operator+(Fraction& fraction,float float_num);
         friend Fraction operator+(float float_num,  Fraction& fraction);
 
-        friend Fraction operator-(const Fraction& fraction, const float& float_num);
-        friend Fraction operator-(const float& float_num, const Fraction& fraction);
+        friend Fraction operator-(Fraction& fraction,float float_num);
+        friend Fraction operator-(float float_num,Fraction& fraction);
 
-        friend Fraction operator*(const Fraction& fraction, const float& float_num);
-        friend Fraction operator*(const float& float_num, const Fraction& fraction);
+        friend Fraction operator*(Fraction& fraction,float float_num);
+        friend Fraction operator*(float float_num,Fraction& fraction);
 
-        friend Fraction operator/(const Fraction& fraction, const float& float_num);
-        friend Fraction operator/(const float& float_num, const Fraction& fraction);
+        friend Fraction operator/(Fraction& fraction,float float_num);
+        friend Fraction operator/(float float_num,Fraction& fraction);
 
-        friend bool operator==(const Fraction& fraction, const float& float_num);
-        friend bool operator==(const float& float_num, const Fraction& fraction);
+        friend bool operator==(Fraction& fraction,float float_num);
+        friend bool operator==(float float_num,Fraction& fraction);
 
-        friend bool operator!=(const Fraction& fraction, const float& float_num);
-        friend bool operator!=(const float& float_num, const Fraction& fraction);
-
-        friend bool operator<(const Fraction& fraction, const float& float_num);
-        friend bool operator<(const float& float_num, const Fraction& fraction);
+        friend bool operator<(Fraction& fraction,float float_num);
+        friend bool operator<(float float_num,Fraction& fraction);
 
         friend bool operator<=(const Fraction& fraction, const float& float_num);
         friend bool operator<=(const float& float_num, const Fraction& fraction);

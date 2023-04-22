@@ -20,9 +20,11 @@ using namespace ariel;
 int main() {
     Fraction a(5,3), b(14,21);
     float d= 0.25;
-    Fraction c = a+d;
-    cout<<c<<endl;
+    //Fraction c = a/d;
+    Fraction e = d+a;
 
+    cout<<(d<e)<<endl;
+    cout<<(e<d)<<endl;
     //  Fraction c =a+b;
 //    cout << "a: " << a << "b: " << b << endl;
 //    std::cout << "a+b" << c << endl;
