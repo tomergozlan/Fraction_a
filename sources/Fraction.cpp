@@ -54,11 +54,11 @@ namespace ariel {
         return fraction;
     }
 
-    int Fraction::getNumerator() {
+    int Fraction::getNumerator() const {
         return this->numerator;
     }
 
-    int Fraction::getDenominator() {
+    int Fraction::getDenominator() const {
         return this->denominator;
     }
 
@@ -73,7 +73,7 @@ namespace ariel {
         this->denominator = new_denominator;
     }
 
-    Fraction Fraction::operator+(Fraction &fraction) {
+    Fraction Fraction::operator+(const Fraction &fraction) const {
         Fraction resultFraction;
 
         if (this->denominator == fraction.getDenominator()) {
@@ -88,7 +88,7 @@ namespace ariel {
         return resultFraction;
     }
 
-    Fraction Fraction::operator-(Fraction &fraction) {
+    Fraction Fraction::operator-(const Fraction &fraction) const {
         Fraction resultFraction;
 
         if (this->denominator == fraction.getDenominator()) {
@@ -103,7 +103,7 @@ namespace ariel {
         return resultFraction;
     }
 
-    Fraction Fraction::operator*(Fraction &fraction) {
+    Fraction Fraction::operator*(const Fraction &fraction) const {
         Fraction resultFraction;
 
         resultFraction.setNumerator(this->numerator * fraction.getNumerator());
@@ -113,7 +113,7 @@ namespace ariel {
         return resultFraction;
     }
 
-    Fraction Fraction::operator/(Fraction &fraction) {
+    Fraction Fraction::operator/(const Fraction &fraction) const {
         Fraction resultFraction;
 
         resultFraction.setDenominator(this->denominator * fraction.getNumerator());
@@ -123,23 +123,23 @@ namespace ariel {
         return resultFraction;
     }
 
-    bool Fraction::operator==(Fraction &fraction) {
+    bool Fraction::operator==(const Fraction &fraction) const {
         return (this->numerator * fraction.getDenominator()) == (this->denominator * fraction.getNumerator());
     }
 
-    bool Fraction::operator>(Fraction &fraction) {
+    bool Fraction::operator>(const Fraction &fraction) const {
         return (this->numerator * fraction.getDenominator()) > (this->denominator * fraction.getNumerator());
     }
 
-    bool Fraction::operator<(Fraction &fraction) {
+    bool Fraction::operator<(const Fraction &fraction) const {
         return (this->numerator * fraction.getDenominator()) < (this->denominator * fraction.getNumerator());
     }
 
-    bool Fraction::operator>=(Fraction &fraction) {
+    bool Fraction::operator>=(const Fraction &fraction) const {
         return (this->numerator * fraction.getDenominator()) >= (this->denominator * fraction.getNumerator());
     }
 
-    bool Fraction::operator<=(Fraction &fraction) {
+    bool Fraction::operator<=(const Fraction &fraction) const {
         return (this->numerator * fraction.getDenominator()) <= (this->denominator * fraction.getNumerator());
     }
 
@@ -169,7 +169,7 @@ namespace ariel {
         return temp;
     }
 
-    std::ostream &operator<<(std::ostream &out, Fraction &fraction) {
+    std::ostream &operator<<(std::ostream &out, const Fraction &fraction) {
         out << fraction.getNumerator() << "/" << fraction.getDenominator();
         return out;
     }
@@ -187,8 +187,8 @@ namespace ariel {
         return in;
     }
 
-    Fraction operator+(float float_num, Fraction &fraction) {
-        Fraction float_frac = Fraction::convertFloatToFraction(float_num);
+    Fraction operator+(const float float_num, const Fraction &fraction) {
+        const Fraction float_frac = Fraction::convertFloatToFraction(float_num);
         Fraction resultFraction;
 
         resultFraction.setNumerator(float_frac.getNumerator() * fraction.getDenominator() +
@@ -199,8 +199,8 @@ namespace ariel {
         return resultFraction;
     }
 
-    Fraction operator+(Fraction &fraction, float float_num) {
-        Fraction float_frac = Fraction::convertFloatToFraction(float_num);
+    Fraction operator+(const Fraction &fraction, const float float_num) {
+        const Fraction float_frac = Fraction::convertFloatToFraction(float_num);
         Fraction resultFraction;
 
         resultFraction.setNumerator(float_frac.getNumerator() * fraction.getDenominator() +
@@ -211,8 +211,8 @@ namespace ariel {
         return resultFraction;
     }
 
-    Fraction operator-(float float_num, Fraction &fraction) {
-        Fraction float_frac = Fraction::convertFloatToFraction(float_num);
+    Fraction operator-(const float float_num, const Fraction &fraction) {
+        const Fraction float_frac = Fraction::convertFloatToFraction(float_num);
         Fraction resultFraction;
         if (float_frac.getDenominator() == fraction.getDenominator()) {
             resultFraction.setNumerator(float_frac.getNumerator() - fraction.getNumerator());
@@ -226,8 +226,8 @@ namespace ariel {
         return resultFraction;
     }
 
-    Fraction operator-(Fraction &fraction, float float_num) {
-        Fraction float_frac = Fraction::convertFloatToFraction(float_num);
+    Fraction operator-(const Fraction &fraction, const float float_num) {
+        const Fraction float_frac = Fraction::convertFloatToFraction(float_num);
         Fraction resultFraction;
         if (float_frac.getDenominator() == fraction.getDenominator()) {
             resultFraction.setNumerator(float_frac.getNumerator() - fraction.getNumerator());
@@ -241,8 +241,8 @@ namespace ariel {
         return resultFraction;
     }
 
-    Fraction operator*(Fraction &fraction, float float_num) {
-        Fraction float_frac = Fraction::convertFloatToFraction(float_num);
+    Fraction operator*(const Fraction &fraction, const float float_num) {
+        const Fraction float_frac = Fraction::convertFloatToFraction(float_num);
         Fraction resultFraction;
 
         resultFraction.setNumerator(float_frac.getNumerator() * fraction.getNumerator());
@@ -252,8 +252,8 @@ namespace ariel {
         return resultFraction;
     }
 
-    Fraction operator*(float float_num, Fraction &fraction) {
-        Fraction float_frac = Fraction::convertFloatToFraction(float_num);
+    Fraction operator*(const float float_num, const Fraction &fraction) {
+        const Fraction float_frac = Fraction::convertFloatToFraction(float_num);
         Fraction resultFraction;
 
         resultFraction.setNumerator(float_frac.getNumerator() * fraction.getNumerator());
@@ -263,7 +263,7 @@ namespace ariel {
         return resultFraction;
     }
 
-    Fraction operator/(Fraction &fraction, float float_num) {
+    Fraction operator/(const Fraction &fraction, float float_num) {
         Fraction float_frac = Fraction::convertFloatToFraction(float_num);
         Fraction resultFraction;
 
@@ -274,7 +274,7 @@ namespace ariel {
         return resultFraction;
     }
 
-    Fraction operator/(float float_num, Fraction &fraction) {
+    Fraction operator/(float float_num, const Fraction &fraction) {
         Fraction float_frac = Fraction::convertFloatToFraction(float_num);
         Fraction resultFraction;
 
@@ -285,56 +285,63 @@ namespace ariel {
         return resultFraction;
     }
 
-    bool operator==(Fraction &fraction, float float_num) {
+    bool operator==(const Fraction &fraction, float float_num) {
         Fraction float_frac = Fraction::convertFloatToFraction(float_num);
         return (float_frac.getNumerator() * fraction.getDenominator()) ==
                (float_frac.getDenominator() * fraction.getNumerator());
     }
 
-    bool operator==(float float_num, Fraction &fraction) {
+    bool operator==(float float_num, const Fraction &fraction) {
         Fraction float_frac = Fraction::convertFloatToFraction(float_num);
-        return (float_frac.getNumerator() * fraction.getDenominator()) == (float_frac.getDenominator() * fraction.getNumerator());
+        return (float_frac.getNumerator() * fraction.getDenominator()) ==
+               (float_frac.getDenominator() * fraction.getNumerator());
     }
 
-    bool operator<(Fraction &fraction, float float_num) {
+    bool operator<(const Fraction &fraction, float float_num) {
         Fraction float_frac = Fraction::convertFloatToFraction(float_num);
-        return (float_frac.getNumerator() * fraction.getDenominator()) < (float_frac.getDenominator() * fraction.getNumerator());
+        return (float_frac.getDenominator() * fraction.getNumerator() <
+                (float_frac.getNumerator() * fraction.getDenominator()));
     }
 
-    bool operator<(float float_num, Fraction &fraction) {
+    bool operator<(float float_num, const Fraction &fraction) {
         Fraction float_frac = Fraction::convertFloatToFraction(float_num);
-        return (float_frac.getNumerator() * fraction.getDenominator()) < (float_frac.getDenominator() * fraction.getNumerator());
+        return (float_frac.getNumerator() * fraction.getDenominator()) <
+               (float_frac.getDenominator() * fraction.getNumerator());
     }
 
-    bool operator<=(Fraction &fraction, float float_num) {
+    bool operator<=(const Fraction &fraction, float float_num) {
         Fraction float_frac = Fraction::convertFloatToFraction(float_num);
-        return (float_frac.getNumerator() * fraction.getDenominator()) <= (float_frac.getDenominator() * fraction.getNumerator());
+        return (float_frac.getDenominator() * fraction.getNumerator() <=
+                (float_frac.getNumerator() * fraction.getDenominator()));
     }
 
-    bool operator<=(float float_num, Fraction &fraction) {
+    bool operator<=(float float_num, const Fraction &fraction) {
         Fraction float_frac = Fraction::convertFloatToFraction(float_num);
-        return (float_frac.getNumerator() * fraction.getDenominator()) <= (float_frac.getDenominator() * fraction.getNumerator());
+        return (float_frac.getNumerator() * fraction.getDenominator()) <=
+               (float_frac.getDenominator() * fraction.getNumerator());
     }
 
-    bool operator>(Fraction &fraction, float float_num) {
+    bool operator>(const Fraction &fraction, float float_num) {
         Fraction float_frac = Fraction::convertFloatToFraction(float_num);
-        return (float_frac.getNumerator() * fraction.getDenominator()) > (float_frac.getDenominator() * fraction.getNumerator());
+        return (float_frac.getDenominator() * fraction.getNumerator() >
+                (float_frac.getNumerator() * fraction.getDenominator()));
     }
 
-    bool operator>(float float_num, Fraction &fraction) {
+    bool operator>(float float_num, const Fraction &fraction) {
         Fraction float_frac = Fraction::convertFloatToFraction(float_num);
-        return (float_frac.getNumerator() * fraction.getDenominator()) > (float_frac.getDenominator() * fraction.getNumerator());
+        return (float_frac.getNumerator() * fraction.getDenominator()) >
+               (float_frac.getDenominator() * fraction.getNumerator());
     }
 
-    operator>=(Fraction &fraction,float float_num) {
-    Fraction float_frac = Fraction::convertFloatToFraction(float_num);
-    return (float_frac.getNumerator() * fraction.getDenominator()) >= (float_frac.getDenominator() * fraction.getNumerator());
+    bool operator>=(const Fraction &fraction, float float_num) {
+        Fraction float_frac = Fraction::convertFloatToFraction(float_num);
+        return (float_frac.getDenominator() * fraction.getNumerator() >=
+                (float_frac.getNumerator() * fraction.getDenominator()));
+    }
+
+    bool operator>=(float float_num, const Fraction &fraction) {
+        Fraction float_frac = Fraction::convertFloatToFraction(float_num);
+        return (float_frac.getNumerator() * fraction.getDenominator()) >=
+               (float_frac.getDenominator() * fraction.getNumerator());
+    }
 }
-
-operator>=(float float_num, Fraction &fraction) {
-    Fraction float_frac = Fraction::convertFloatToFraction(float_num);
-    return (float_frac.getNumerator() * fraction.getDenominator()) >= (float_frac.getDenominator() * fraction.getNumerator());
-}
-
-}
-
