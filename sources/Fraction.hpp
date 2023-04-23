@@ -42,7 +42,7 @@ namespace ariel{
         bool operator>=(const Fraction& fraction) const;
         bool operator<=(const Fraction& fraction) const;
 
-        Fraction operator++();
+        Fraction& operator++();
         Fraction operator++(int);
         Fraction operator--();
         Fraction operator--(int);

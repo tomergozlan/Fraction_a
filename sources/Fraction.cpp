@@ -23,7 +23,6 @@ namespace ariel {
         }
         this->denominator = denominator;
         this->numerator = numerator;
-
         reduceForm();
     }
 
@@ -37,7 +36,7 @@ namespace ariel {
     }
 
     void Fraction::reduceForm() {
-        int gcd = this->gcd(this->numerator, this->denominator);
+        int gcd = this->gcd(::abs(this->numerator), this->denominator);
         if (gcd > 1) {
             this->numerator /= gcd;
             this->denominator /= gcd;
@@ -48,7 +47,7 @@ namespace ariel {
         if (value > std::numeric_limits<float>::max() || value < std::numeric_limits<float>::min()) {
             throw out_of_range("ERROR: out of range float number.");
         }
-        int numerator = (value * 1000);
+        int numerator =(value * 1000);
         int denominator = 1000;
         Fraction fraction(numerator, denominator);
         return fraction;
@@ -64,6 +63,11 @@ namespace ariel {
 
     void Fraction::setNumerator(int new_numerator) {
         this->numerator = new_numerator;
+        if (numerator < 0 && denominator < 0 || numerator > 0 && denominator < 0) {
+            denominator *= -1;
+            numerator *= -1;
+        }
+        this->reduceForm();
     }
 
     void Fraction::setDenominator(int new_denominator) {
@@ -71,6 +75,11 @@ namespace ariel {
             throw invalid_argument("Error: the denominator of fraction can't be zero.");
         }
         this->denominator = new_denominator;
+        if (numerator < 0 && denominator < 0 || numerator > 0 && denominator < 0) {
+            denominator *= -1;
+            numerator *= -1;
+        }
+        this->reduceForm();
     }
 
     Fraction Fraction::operator+(const Fraction &fraction) const {
@@ -90,13 +99,11 @@ namespace ariel {
 
     Fraction Fraction::operator-(const Fraction &fraction) const {
         Fraction resultFraction;
-
         if (this->denominator == fraction.getDenominator()) {
             resultFraction.setNumerator(this->numerator - fraction.getNumerator());
             resultFraction.setDenominator(this->denominator);
         } else {
-            resultFraction.setNumerator(
-                    (this->numerator * fraction.getDenominator()) - (fraction.getNumerator() * this->denominator));
+            resultFraction.setNumerator((this->numerator * fraction.getDenominator()) - (fraction.getNumerator() * this->denominator));
             resultFraction.setDenominator(this->denominator * fraction.getDenominator());
         }
         resultFraction.reduceForm();
@@ -143,16 +150,15 @@ namespace ariel {
         return (this->numerator * fraction.getDenominator()) <= (this->denominator * fraction.getNumerator());
     }
 
-    Fraction Fraction::operator++() {
+    Fraction& Fraction::operator++() {
         this->numerator += this->denominator;
         this->reduceForm();
         return *this;
     }
 
     Fraction Fraction::operator++(int) {
-        Fraction temp(*this);
-        this->numerator += this->denominator;
-        temp.reduceForm();
+        Fraction temp= (*this);
+        ++(*this);
         return temp;
     }
 
@@ -163,7 +169,7 @@ namespace ariel {
     }
 
     Fraction Fraction::operator--(int) {
-        Fraction temp(*this);
+        Fraction temp = (*this);
         this->numerator -= this->denominator;
         temp.reduceForm();
         return temp;
@@ -230,11 +236,10 @@ namespace ariel {
         const Fraction float_frac = Fraction::convertFloatToFraction(float_num);
         Fraction resultFraction;
         if (float_frac.getDenominator() == fraction.getDenominator()) {
-            resultFraction.setNumerator(float_frac.getNumerator() - fraction.getNumerator());
-            resultFraction.setDenominator(float_frac.getDenominator());
+            resultFraction.setNumerator( fraction.getNumerator()-float_frac.getNumerator());
+            resultFraction.setDenominator(fraction.getDenominator());
         } else {
-            resultFraction.setNumerator((float_frac.getNumerator() * fraction.getDenominator()) -
-                                        (fraction.getNumerator() * float_frac.getDenominator()));
+            resultFraction.setNumerator((fraction.getNumerator() * float_frac.getDenominator()) -(fraction.getDenominator() * float_frac.getNumerator()));
             resultFraction.setDenominator(float_frac.getDenominator() * fraction.getDenominator());
         }
         resultFraction.reduceForm();
