@@ -30,6 +30,7 @@ namespace ariel {
         this->numerator = other.numerator;
         this->denominator = other.denominator;
     }
+    Fraction::~Fraction(){}
 
     int Fraction::gcd(int number1, int number2) {
         return (number2 == 0) ? number1 : gcd(number2, number1 % number2);
@@ -130,6 +131,20 @@ namespace ariel {
         return resultFraction;
     }
 
+    Fraction& Fraction::operator=(const Fraction &other) {
+        if (this != &other) {
+            numerator = other.numerator;
+            denominator = other.denominator;
+        }
+        return *this;
+    }
+
+        Fraction& Fraction::operator=(Fraction &&other) noexcept {
+        numerator = std::move(other.numerator);
+        denominator = std::move(other.denominator);
+        return *this;
+        }
+
     bool Fraction::operator==(const Fraction &fraction) const {
         return (this->numerator * fraction.getDenominator()) == (this->denominator * fraction.getNumerator());
     }
@@ -180,17 +195,17 @@ namespace ariel {
         return out;
     }
 
-    std::istream &operator>>(std::istream &in, Fraction &fraction) {
+    std::istream &operator>>(std::istream &input, Fraction &fraction) {
         int numerator, denominator;
         char slash;
 
-        if (in >> numerator >> slash >> denominator && slash == '/') {
+        if (input >> numerator >> slash >> denominator && slash == '/') {
             fraction.setNumerator(numerator);
             fraction.setDenominator(denominator);
         } else {
             throw invalid_argument("ERROR: invalid input format.");
         }
-        return in;
+        return input;
     }
 
     Fraction operator+(const float float_num, const Fraction &fraction) {
