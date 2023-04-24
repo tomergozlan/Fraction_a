@@ -7,9 +7,12 @@
 
 # Constructor:
 
-Fraction(int numerator, int denominator): constructs a Fraction object with the given numerator and denominator. 
+* Fraction(int numerator, int denominator): constructs a Fraction object with the given numerator and denominator. 
 It reduces the fraction to its simplest form and throws an exception if the denominator is zero or if the numerator or denominator is out of range.
-
+* Fraction::Fraction(int numerator, int denominator): constructor creates a Fraction object with the given numerator and denominator, while performing several checks to ensure that the values are valid. It reduces the fraction to its simplest form by calling the reduceForm method.
+* Fraction::Fraction(const Fraction &other): copy constructor creates a new Fraction object that is a copy of the Fraction object passed in as an argument.
+* Fraction::~Fraction() : destructor does nothing, as there is no dynamic memory allocated in the Fraction class.
+* Fraction(Fraction&& other) noexcept : The move constructor initializes the fields of a new Fraction object using the fields of an existing Fraction object that is being moved from, without copying the data, for performance optimization.
 # Public Methods:
 
 * int getNumerator() const: returns the numerator of the fraction.
