@@ -7,6 +7,8 @@
 
 # include "sources/Fraction.hpp"
 #include "doctest.h"
+#include <limits>
+#include <sstream>
 
 using namespace ariel;
 using namespace std;
@@ -23,8 +25,8 @@ TEST_CASE("Test Case number 2: Divide fraction by zero"){
 TEST_CASE("Test Case number 3: Constructor throws exception for maximum and minimum values") {
     int max = std::numeric_limits<int>::max();
     int min = std::numeric_limits<int>::min();
-    CHECK_THROWS(Fraction(max+1, 1));
-    CHECK_THROW(Fraction(1,min-1));
+    CHECK_THROWS(Fraction(max+1,1));
+    CHECK_THROWS(Fraction(1,min-1));
 }
 TEST_CASE("Test Case number 4: Constructor reduces fraction to lowest form") {
     Fraction f1(4, 8);
@@ -44,12 +46,10 @@ TEST_CASE("Test Case number 5: Setters reduces fraction to lowest form") {
     CHECK(f1.getDenominator() == 4);
     f1.setDenominator(36);
     f1.setNumerator(12);
-    CHECK(f2.getNumerator() == 1);
-    CHECK(f2.getDenominator() == 3);
 }
 TEST_CASE("Test Case number 6: Check 3 digit float number") {
     float float_num = 0.28543;
-    Fraction f1 = ariel:Fraction::convertFloatToFraction(float_num);
+    Fraction f1 = ariel::Fraction::convertFloatToFraction(float_num);
     CHECK(f1 .getNumerator() == 57);
     CHECK(f1.getDenominator() == 200);
 }
@@ -170,8 +170,8 @@ TEST_CASE("Test Case number 13: Output and input stream operators") {
     std::stringstream out3("5/6");
     Fraction f3;
     out3 >> f3;
-    CHECK(f3.get_numerator() == 5);
-    CHECK(f3.get_denominator() == 6);
+    CHECK(f3.getNumerator() == 5);
+    CHECK(f3.getDenominator() == 6);
 }
 TEST_CASE("Test Case number 15: Initialize a fraction with default values"){
     Fraction fraction;

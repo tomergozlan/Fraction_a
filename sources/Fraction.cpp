@@ -122,16 +122,17 @@ namespace ariel {
     }
 
     Fraction Fraction::operator/(const Fraction &fraction) const {
-        Fraction resultFraction;
+            Fraction resultFraction;
 
-        resultFraction.setDenominator(this->denominator * fraction.getNumerator());
-        resultFraction.setNumerator(this->numerator * fraction.getDenominator());
+            resultFraction.setNumerator(this->numerator * fraction.getDenominator());
+            resultFraction.setDenominator(this->denominator * fraction.getNumerator());
 
-        resultFraction.reduceForm();
-        return resultFraction;
-    }
+            resultFraction.reduceForm();
+            return resultFraction;
+        }
 
-    Fraction& Fraction::operator=(const Fraction &other) {
+
+        Fraction& Fraction::operator=(const Fraction &other) {
         if (this != &other) {
             numerator = other.numerator;
             denominator = other.denominator;
@@ -287,8 +288,8 @@ namespace ariel {
         Fraction float_frac = Fraction::convertFloatToFraction(float_num);
         Fraction resultFraction;
 
-        resultFraction.setDenominator(float_frac.getDenominator() * fraction.getNumerator());
-        resultFraction.setNumerator(float_frac.getNumerator() * fraction.getDenominator());
+        resultFraction.setNumerator( fraction.getNumerator()*float_frac.getDenominator());
+        resultFraction.setDenominator( fraction.getDenominator()*float_frac.getNumerator());
 
         resultFraction.reduceForm();
         return resultFraction;
@@ -298,8 +299,8 @@ namespace ariel {
         Fraction float_frac = Fraction::convertFloatToFraction(float_num);
         Fraction resultFraction;
 
-        resultFraction.setDenominator(float_frac.getDenominator() * fraction.getNumerator());
         resultFraction.setNumerator(float_frac.getNumerator() * fraction.getDenominator());
+        resultFraction.setDenominator(float_frac.getDenominator() * fraction.getNumerator());
 
         resultFraction.reduceForm();
         return resultFraction;

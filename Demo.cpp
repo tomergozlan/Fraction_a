@@ -32,7 +32,6 @@ int main() {
     if (a > 1.1) cout << "a is bigger than 1.1" << endl;
     else cout << " a is smaller than 1.1" << endl;
 }
-
 /**
  ** My Demo file for the exercise
  * @author Tomer Gozlan
